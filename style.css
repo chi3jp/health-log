@@ -1,0 +1,121 @@
+/* 基本スタイル */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1em;
+}
+
+h1, h2 {
+  color: #1e293b;
+}
+
+.section {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.5em;
+  margin-bottom: 1.5em;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  font-weight: 600;
+  margin-bottom: 0.8em;
+  color: #475569;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 0.5em;
+  margin: 0.5em 0;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+button {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.6em 1.2em;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background 0.2s;
+  margin: 0.2em;
+}
+
+button:hover {
+  background: #2563eb;
+}
+
+/* ボタングループスタイル */
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.btn-option {
+  border: 1px solid #999;
+  border-radius: 2em;
+  background: #f1f5f9;
+  padding: 0.5em 1.2em;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s, color 0.2s;
+  color: #333;
+}
+
+.btn-option.selected {
+  background: #38bdf8;
+  color: #fff;
+  border-color: #38bdf8;
+}
+
+/* 履歴スタイル */
+#history {
+  margin-top: 1em;
+}
+
+.history-item {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 1em;
+  margin-bottom: 0.8em;
+}
+
+.history-item h3 {
+  margin: 0 0 0.5em 0;
+  color: #334155;
+}
+
+.history-item p {
+  margin: 0.3em 0;
+  color: #64748b;
+}
+
+.btn-delete {
+  background: #ef4444;
+  margin-top: 0.5em;
+}
+
+.btn-delete:hover {
+  background: #dc2626;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 600px) {
+  .section {
+    padding: 1em;
+  }
+  
+  .btn-option {
+    padding: 0.4em 0.8em;
+    font-size: 0.9em;
+  }
+}
