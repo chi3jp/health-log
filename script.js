@@ -45,6 +45,17 @@ document.addEventListener('DOMContentLoaded', function() {
   activityOtherEl.addEventListener('input', (e) => currentEntry.activityOther = e.target.value);
   painTypeOtherEl.addEventListener('input', (e) => currentEntry.painTypeOther = e.target.value);
   
+  // 削除ボタンのイベントを委譲
+  historyEl.addEventListener('click', (e) => {
+    const deleteBtn = e.target.closest('.btn-delete');
+    if (deleteBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      const index = parseInt(deleteBtn.dataset.index, 10);
+      deleteLog(index);
+    }
+  });
+  
   // CSVでエクスポート
   function exportToCsv() {
     if (data.logs.length === 0) {
@@ -295,13 +306,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   // ログを削除
-  window.deleteLog = function(index) {
+  function deleteLog(index) {
     if (confirm('この記録を削除しますか？')) {
       data.logs.splice(index, 1);
       saveData();
       render();
     }
-  };
+  }
 
   // 新しい主症状を追加
   function addMainSymptom() {
