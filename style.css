@@ -108,6 +108,30 @@ button:hover {
   background: #dc2626;
 }
 
+/* 並び替えセレクタ */
+.sort-select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background-color: white;
+  font-size: 0.95em;
+  color: #334155;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.sort-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+label[for="sort-order"] {
+  font-size: 0.95em;
+  color: #475569;
+  font-weight: 500;
+}
+
 /* レスポンシブデザイン */
 @media (max-width: 600px) {
   .section {

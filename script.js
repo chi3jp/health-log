@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('add-activity-btn').addEventListener('click', addActivity);
   document.getElementById('csv-export-btn').addEventListener('click', exportToCsv);
   document.getElementById('text-export-btn').addEventListener('click', exportToText);
+  document.getElementById('sort-order').addEventListener('change', renderHistory);
   activityOtherEl.addEventListener('input', (e) => currentEntry.activityOther = e.target.value);
   painTypeOtherEl.addEventListener('input', (e) => currentEntry.painTypeOther = e.target.value);
   
@@ -208,15 +209,27 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
+    // 並び順を取得
+    const sortOrder = document.getElementById('sort-order').value;
+    
+    // ログのコピーを作成してソート
+    const sortedLogs = [...data.logs];
+    if (sortOrder === 'newest') {
+      sortedLogs.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    } else {
+      sortedLogs.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+    }
+
     let html = '';
-    data.logs.reverse().forEach((log, index) => {
+    sortedLogs.forEach((log) => {
       const date = new Date(log.timestamp).toLocaleString();
+      const originalIndex = data.logs.indexOf(log);
       
       html += `
         <div class="history-item">
           <div class="history-header">
             <span class="history-date">${date}</span>
-            <button class="delete-btn" data-index="${index}">削除</button>
+            <button class="delete-btn" data-index="${originalIndex}">削除</button>
           </div>
           <div class="history-content">
             <p><strong>主症状：</strong>${log.mainSymptoms.join(', ')}</p>

@@ -40,9 +40,16 @@
     </form>
     <section class="history-section">
       <h2>履歴</h2>
-      <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; align-items: center;">
         <button type="button" id="csv-export-btn" class="submit-btn">CSV出力</button>
         <button type="button" id="text-export-btn" class="submit-btn">テキスト出力</button>
+        <div style="margin-left: auto; display: flex; align-items: center; gap: 5px;">
+          <label for="sort-order" style="font-size: 14px;">並び順：</label>
+          <select id="sort-order" class="sort-select">
+            <option value="newest">新しい順</option>
+            <option value="oldest">古い順</option>
+          </select>
+        </div>
       </div>
       <div id="history"></div>
     </section>
