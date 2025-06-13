@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="history-item">
           <div class="history-header">
             <span class="history-date">${date}</span>
-            <button class="delete-btn" data-index="${originalIndex}">削除</button>
+            <button class="btn-delete" data-index="${originalIndex}">削除</button>
           </div>
           <div class="history-content">
             <p><strong>主症状：</strong>${log.mainSymptoms.join(', ')}</p>
