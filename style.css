@@ -64,6 +64,17 @@ button[type="submit"]:hover,
   background: #2563eb;
 }
 
+/* 危険ボタン */
+button.danger {
+  background: #fecaca;  /* 薄いピンク */
+  color: #b91c1c;    /* 濃い赤のテキスト */
+  border: 1px solid #fca5a5;
+}
+
+button.danger:hover {
+  background: #fca5a5;  /* ホバー時は少し濃いピンクに */
+}
+
 /* ボタングループスタイル */
 .btn-group {
   display: flex;

@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('add-activity-btn').addEventListener('click', addActivity);
   document.getElementById('csv-export-btn').addEventListener('click', exportToCsv);
   document.getElementById('text-export-btn').addEventListener('click', exportToText);
+  document.getElementById('clear-history-btn').addEventListener('click', clearHistory);
   document.getElementById('sort-order').addEventListener('change', renderHistory);
   activityOtherEl.addEventListener('input', (e) => currentEntry.activityOther = e.target.value);
   painTypeOtherEl.addEventListener('input', (e) => currentEntry.painTypeOther = e.target.value);
@@ -286,6 +287,21 @@ document.addEventListener('DOMContentLoaded', function() {
   // データをローカルストレージに保存
   function saveData() {
     localStorage.setItem('healthLogData', JSON.stringify(data));
+  }
+
+  // 履歴をクリア
+  function clearHistory() {
+    if (data.logs.length === 0) {
+      alert('クリアする履歴がありません');
+      return;
+    }
+
+    if (confirm('本当に全ての履歴を削除しますか？この操作は元に戻せません。')) {
+      data.logs = [];
+      saveData();
+      renderHistory();
+      alert('履歴をクリアしました');
+    }
   }
 
   // フォームをリセット

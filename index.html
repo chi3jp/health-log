@@ -43,6 +43,7 @@
       <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; align-items: center;">
         <button type="button" id="csv-export-btn" class="submit-btn">CSV出力</button>
         <button type="button" id="text-export-btn" class="submit-btn">テキスト出力</button>
+        <button type="button" id="clear-history-btn" class="submit-btn danger">履歴をクリア</button>
         <div style="margin-left: auto; display: flex; align-items: center; gap: 5px;">
           <label for="sort-order" style="font-size: 14px;">並び順：</label>
           <select id="sort-order" class="sort-select">
@@ -54,6 +55,9 @@
       <div id="history"></div>
     </section>
   </main>
+  <footer style="text-align: center; margin-top: 30px; padding: 15px 0; color: #666; font-size: 14px;">
+    体調メモ＆症状ログ v1.0.0
+  </footer>
   <script src="script.js"></script>
 </body>
 </html>
