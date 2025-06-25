@@ -85,7 +85,7 @@ function getFilteredLogs() {
 
 function rebuildCountsFromHistory() {
   symptomCounts = {};
-  data.logs.forEach(log => {
+  getFilteredLogs().forEach(log => {
     log.mainSymptoms.forEach(sym => {
       symptomCounts[sym] = (symptomCounts[sym] || 0) + 1;
     });
@@ -123,6 +123,16 @@ function rebuildCountsFromHistory() {
   document.getElementById('text-export-btn').addEventListener('click', exportToText);
   document.getElementById('clear-history-btn').addEventListener('click', clearHistory);
   document.getElementById('sort-order').addEventListener('change', renderHistory);
+  // 期間セレクト変更でグラフ更新
+  const periodSelect = document.getElementById('period-select');
+  if (periodSelect) {
+    periodSelect.addEventListener('change', rebuildCountsFromHistory);
+  }
+  // 期間選択でグラフ更新
+  const periodSel = document.getElementById('period-select');
+  if(periodSel){
+    periodSel.addEventListener('change', rebuildCountsFromHistory);
+  }
   activityOtherEl.addEventListener('input', (e) => currentEntry.activityOther = e.target.value);
   painTypeOtherEl.addEventListener('input', (e) => currentEntry.painTypeOther = e.target.value);
   
