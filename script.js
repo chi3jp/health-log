@@ -73,6 +73,16 @@ function updateChart() {
   });
 }
 
+function getFilteredLogs() {
+  const select = document.getElementById('period-select');
+  const period = select ? select.value : 'all';
+  if (period === 'all') return data.logs;
+  const now = Date.now();
+  const limit = period === 'week' ? 7 : 30; // days
+  const from = now - limit*24*60*60*1000;
+  return data.logs.filter(log => (new Date(log.timestamp)).getTime() >= from);
+}
+
 function rebuildCountsFromHistory() {
   symptomCounts = {};
   data.logs.forEach(log => {
@@ -348,11 +358,8 @@ function rebuildCountsFromHistory() {
     // フォームをリセット
     resetForm();
     
-    // カウント更新
-    currentEntry.mainSymptoms.forEach(sym => {
-      symptomCounts[sym] = (symptomCounts[sym] || 0) + 1;
-    });
-    updateChart();
+    // グラフ用カウントを再構築
+    rebuildCountsFromHistory();
 
     // 再レンダリング
     render();

@@ -69,7 +69,14 @@
   <!-- === タブコンテンツ: 頻度グラフ === -->
   <div id="freq-tab" class="tab-content">
     <div class="chart-container">
-      <h2>主症状出現頻度</h2>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
+        <h2 style="margin:0;">主症状出現頻度</h2>
+        <select id="period-select" class="period-select">
+          <option value="all">全期間</option>
+          <option value="month">過去30日</option>
+          <option value="week">過去7日</option>
+        </select>
+      </div>
       <canvas id="symptomChart"></canvas>
     </div>
   </div>
