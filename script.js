@@ -29,9 +29,79 @@ document.addEventListener('DOMContentLoaded', function() {
   const historyEl = document.getElementById('history');
   const activityOtherEl = document.getElementById('activity-other');
   const painTypeOtherEl = document.getElementById('pain-type-other');
+const symptomChartEl = document.getElementById('symptomChart');
+
+// ===== グラフ用データ =====
+let symptomCounts = {};
+let symptomChart = null;
+
+function updateChart() {
+  if (!symptomChartEl) return;
+  const ctx = symptomChartEl.getContext('2d');
+  const labels = Object.keys(symptomCounts);
+  const dataArr = Object.values(symptomCounts);
+
+  if (symptomChart) {
+    symptomChart.destroy();
+  }
+
+  if (labels.length === 0) {
+    symptomChartEl.parentElement.style.display = 'none';
+    return;
+  }
+  symptomChartEl.parentElement.style.display = 'block';
+
+  const colors = labels.map((_, i) => `hsl(${(i*137.508)%360},70%,60%)`);
+  symptomChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        label: '出現回数',
+        data: dataArr,
+        backgroundColor: colors,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: { beginAtZero: true, ticks: { stepSize: 1 } }
+      },
+      plugins: { legend: { display: false } }
+    }
+  });
+}
+
+function rebuildCountsFromHistory() {
+  symptomCounts = {};
+  data.logs.forEach(log => {
+    log.mainSymptoms.forEach(sym => {
+      symptomCounts[sym] = (symptomCounts[sym] || 0) + 1;
+    });
+  });
+  updateChart();
+}
+
 
   // 初期レンダリング
   render();
+  // 履歴からグラフ用のカウントを構築
+  rebuildCountsFromHistory();
+
+  // ===== タブ切り替え =====
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      // ボタンの active 切替
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      // コンテンツ表示切替
+      const target = btn.dataset.tab;
+      document.querySelectorAll('.tab-content').forEach(sec => {
+        sec.classList.toggle('active', sec.id === target);
+      });
+    });
+  });
 
   // イベントリスナー
   form.addEventListener('submit', handleSubmit);
@@ -278,6 +348,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // フォームをリセット
     resetForm();
     
+    // カウント更新
+    currentEntry.mainSymptoms.forEach(sym => {
+      symptomCounts[sym] = (symptomCounts[sym] || 0) + 1;
+    });
+    updateChart();
+
     // 再レンダリング
     render();
     

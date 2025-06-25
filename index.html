@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>体調メモ＆症状ログ</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <main>
@@ -38,7 +40,15 @@
 <input type="text" id="activity-other" placeholder="自由にメモを入力してください" style="margin-top: 4px; width: 100%;" />
       <button type="submit" id="save-button" class="submit-btn">記録</button>
     </form>
-    <section class="history-section">
+
+    <!-- === タブナビゲーション === -->
+    <div class="tab-nav">
+      <button type="button" class="tab-btn active" data-tab="history-tab">履歴</button>
+      <button type="button" class="tab-btn" data-tab="freq-tab">頻度グラフ</button>
+    </div>
+
+    <!-- === タブコンテンツ: 履歴 === -->
+    <section id="history-tab" class="history-section tab-content active">
       <h2>履歴</h2>
       <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; align-items: center;">
         <button type="button" id="csv-export-btn" class="submit-btn">CSV出力</button>
@@ -55,8 +65,16 @@
       <div id="history"></div>
     </section>
   </main>
+
+  <!-- === タブコンテンツ: 頻度グラフ === -->
+  <div id="freq-tab" class="tab-content">
+    <div class="chart-container">
+      <h2>主症状出現頻度</h2>
+      <canvas id="symptomChart"></canvas>
+    </div>
+  </div>
   <footer style="text-align: center; margin-top: 30px; padding: 15px 0; color: #666; font-size: 14px;">
-    体調メモ＆症状ログ v1.0.0
+    体調メモ＆症状ログ v1.1.0
   </footer>
   <script src="script.js"></script>
 </body>
