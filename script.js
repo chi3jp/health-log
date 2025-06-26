@@ -420,6 +420,7 @@ function rebuildCountsFromHistory() {
       data.logs.splice(index, 1);
       saveData();
       render();
+      rebuildCountsFromHistory(); // グラフを更新
     }
   }
 
